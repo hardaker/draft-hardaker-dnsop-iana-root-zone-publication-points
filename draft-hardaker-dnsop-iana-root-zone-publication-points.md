@@ -31,17 +31,17 @@ author:
 
 normative:
   BCP237:
-  RFC1982:  # SOA math
-  RFC4033:  # DNSSEC
-  RFC8198:
-  RFC8499:
-  RFC8806:
-  RFC8976:
+  RFC1982:   # SOA math
+  RFC4033:   # DNSSEC
+  RFC8198:   # Aggressive Use of DNSSEC-Validated Cache
+  RFC8499:   # DNS Terminology
+  RFC8806:   # DNS Zone Transfers over HTTPS
+  RFC8976:   # DNS over HTTPS (DoH) Usage Profiles
 
 informative:
   RFC5936:  # DNS Zone Transfer
   RFC7766:  # DNS Transport over TCP
-  RFC7706:
+  RFC7706:  # DNS Local Root
   RFC9156:  # QNAME Minimisation
   RFC9110:  # HTTP Semantics and Methods
 
@@ -81,34 +81,31 @@ informative:
 
 --- abstract
 
-DNS recursive resolvers implementing functionality like LocalRoot or
-similar services need to obtain the contents of the IANA DNS root zone
-on a regular basis.  This document describes a machine readable format
-for IANA to use when publishing a list of known sources that can be
-use for obtaining the contents of the IANA DNS Root Zone.
+This document describes a machine readable format to be used by IANA to publish
+a list of sources where the contents of the IANA DNS Root Zone may be fetched
+from.
 
 --- middle
 
 # Introduction
 
-DNS recursive resolvers implementing functionality like LocalRoot
-{{draft-wkumari-dnsop-localroot-bcp}} or similar services need to
-obtain the contents of the IANA DNS root zone on a regular basis.
-This document describes a machine readable format for IANA to use when
-publishing a list of known sources that can be use for obtaining the
-contents of the IANA DNS Root Zone.
+DNS recursive resolvers implementing functionality such as LocalRoot
+{{draft-wkumari-dnsop-localroot-bcp}} or similar need to obtain the contents of
+the IANA DNS root zone on a regular basis. This document describes a machine
+readable format to be used by the IANA to publish a list of sources that can be
+used for obtaining the contents of the IANA DNS Root Zone.
 
 # IANA maintained list of root zone publication points  {#iana-root-zone-list}
 
-This list of IANA root zone data publication points available at
-TBD-URL may be used when downloading and refreshing the root zone
-data, as described in {{draft-wkumari-dnsop-localroot-bcp}}.  Specifically, this IANA DNS
-root zone publication list MAY be used by the resolver software
-directly, or by the operating system a resolver is deployed on, or by
-a network operator when configuring a resolver.
+This list of IANA root zone data publication points available at TBD-URL may be
+used when downloading and refreshing the root zone data, as described in
+{{draft-wkumari-dnsop-localroot-bcp}}.  Specifically, this IANA DNS root zone
+publication list MAY be used by the resolver software directly, or by the
+operating system a resolver is deployed on, or by a network operator when
+configuring a resolver.
 
 The contents of the IANA DNS root publication points file MUST
-verified as to its integrity as having come from IANA and MUST be
+be verified as to its integrity as having come from IANA and MUST be
 verified as complete.
 
 ## Root zone publication points
@@ -137,7 +134,7 @@ discarded.  If after filtering the list there are no acceptable list
 elements left, the resolver MUST revert to using regular DNS queries
 to the IANA root zone instead of operating as a LocalRoot.
 
-The first line of the cryptograhpic checksum section will contain a
+The first line of the cryptographic checksum section will contain a
 checksum or signature type string specifying what the remaining lines
 in the checksum or signature section will contain.
 
