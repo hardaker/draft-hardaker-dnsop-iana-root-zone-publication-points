@@ -26,7 +26,7 @@ venue:
 author:
   -
     fullname: Wes Hardaker
-    organization: USC/ISI and Google, Inc.
+    organization: Google, Inc.
     email: ietf@hardakers.net
 
 normative:
