@@ -3,7 +3,7 @@ title: "Populating resolvers with the root zone."
 abbrev: "LocalRoot"
 category: std
 
-docname: draft-wkumari-dnsop-localroot-bcp-latest
+docname: draft-hardaker-dnsop-iana-root-zone-publication-points-latest
 submissiontype: IETF
 consensus: true
 v: 3
@@ -21,8 +21,7 @@ venue:
   type: "Working Group"
   mail: "dnsop@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/dnsop/"
-  github: "https://github.com/wkumari/draft-wkumari-dnsop-localroot-bcp"
-  latest: "https://wkumari.github.io/draft-wkumari-dnsop-localroot-bcp/draft-wkumari-dnsop-localroot-bcp.html"
+  github: "https://github.com/hardaker/draft-hardaker-dnsop-iana-root-zone-publication-points"
 
 author:
   -
