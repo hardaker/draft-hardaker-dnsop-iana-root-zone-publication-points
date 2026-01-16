@@ -14,3 +14,5 @@ else
 endif
 endif
 
+README.txt: draft-hardaker-dnsop-iana-root-zone-publication-points.txt
+	cp $< $@

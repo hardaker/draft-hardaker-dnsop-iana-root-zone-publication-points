@@ -1,1 +1,0 @@
-draft-hardaker-dnsop-iana-root-zone-publication-points.md
