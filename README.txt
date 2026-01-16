@@ -2,18 +2,14 @@
 
 
 
-Domain Name System Operations                                  W. Kumari
-Internet-Draft                                              Google, Inc.
-Updates: RFC8806 (if approved)                               W. Hardaker
-Intended status: Standards Track                USC/ISI and Google, Inc.
-Expires: 20 July 2026                                            J. Reid
-                                                                RTFM llp
-                                                               G. Huston
-                                                                   APNIC
-                                                         16 January 2026
+Domain Name System Operations                                W. Hardaker
+Internet-Draft                                  USC/ISI and Google, Inc.
+Updates: RFC8806 (if approved)                           16 January 2026
+Intended status: Standards Track                                        
+Expires: 20 July 2026
 
 
-                Populating resolvers with the root zone.
+    A format for publishing a list of sources of IANA root zone data
      draft-hardaker-dnsop-iana-root-zone-publication-points-latest
 
 Abstract
@@ -85,7 +81,7 @@ Table of Contents
      6.1.  Normative References
      6.2.  Informative References
    Acknowledgments
-   Authors' Addresses
+   Author's Address
 
 1.  Introduction
 
@@ -288,30 +284,8 @@ Acknowledgments
 
    TBD
 
-Authors' Addresses
-
-   Warren Kumari
-   Google, Inc.
-   Email: warren@kumari.net
-
+Author's Address
 
    Wes Hardaker
    USC/ISI and Google, Inc.
    Email: ietf@hardakers.net
-
-
-   Jim Reid
-   RTFM llp
-   St Andrews House
-   382 Hillington Road, Glasgow Scotland
-   G51 4BL
-   United Kingdom
-   Email: jim@rfc1035.com
-
-
-   Geoff Huston
-   APNIC
-   6 Cordelia St
-   South Brisbane  QLD 4101
-   Australia
-   Email: gih@apnic.net

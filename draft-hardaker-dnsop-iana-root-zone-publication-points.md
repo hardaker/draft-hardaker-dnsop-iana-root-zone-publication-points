@@ -1,6 +1,6 @@
 ---
-title: "Populating resolvers with the root zone."
-abbrev: "LocalRoot"
+title: "A format for publishing a list of sources of IANA root zone data"
+abbrev: "IANA root zone publication points"
 category: std
 
 docname: draft-hardaker-dnsop-iana-root-zone-publication-points-latest
