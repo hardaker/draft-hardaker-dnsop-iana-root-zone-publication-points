@@ -92,7 +92,7 @@ from.
 DNS recursive resolvers implementing functionality such as LocalRoot
 {{draft-wkumari-dnsop-localroot-bcp}} or similar need to obtain the contents of
 the IANA DNS root zone on a regular basis. This document describes a machine
-readable format to be used by the IANA to publish a list of sources that can be
+readable format to be used by IANA to publish a list of sources that can be
 used for obtaining the contents of the IANA DNS Root Zone.
 
 # IANA maintained list of root zone publication points  {#iana-root-zone-list}
@@ -122,7 +122,7 @@ segments, divided by a line consisting of four dashes followed by a newline
 ("----\n"). The first segment contains a list of URLs, one per line. The second
 segment provides a signature or cryptographic checksum.
 
-While this specific format was originally designed for the IANA maintained list
+While this specific format was originally designed for IANA's maintained list
 of root zone publication points, it may also be used by other publication point
 aggregation lists.
 
@@ -160,7 +160,7 @@ SHA256
 
 Implementations SHOULD optimize retrieval to minimize impacts on the
 server.  Because the list is not expected to change frequently,
-implementations SHOULD refrain from querying the IANA source more than
+implementations SHOULD refrain from querying IANA's source more than
 once a week.
 
 # Operational Considerations
