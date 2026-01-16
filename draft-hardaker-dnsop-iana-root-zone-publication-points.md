@@ -146,7 +146,7 @@ in the checksum or signature section will contain.
 (Ed note: We know that this section is underspecified.  We expect to
 refine this as we get feedback from the working group.)
 
-An minimal example publication point file, containing only a single
+A minimal example publication point file, containing only a single
 AXFR publication point of b.root-servers.net:
 
 ~~~~
