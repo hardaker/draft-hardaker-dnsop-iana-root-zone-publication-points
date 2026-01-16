@@ -33,36 +33,13 @@ normative:
   BCP237:
   RFC1982:  # SOA math
   RFC4033:  # DNSSEC
-  RFC8198:
-  RFC8499:
-  RFC8806:
-  RFC8976:
+  RFC8976:  # ZONEMD
 
 informative:
   RFC5936:  # DNS Zone Transfer
   RFC7766:  # DNS Transport over TCP
-  RFC7706:
-  RFC9156:  # QNAME Minimisation
   RFC9110:  # HTTP Semantics and Methods
 
-  BIND-MIRROR:
-    title: "BIND 9 Mirror Zones"
-    target: https://bind9.readthedocs.io/en/stable/reference.html#namedconf-statement-type%20mirror
-  UNBOUND-AUTH-ZONE:
-    title: "Unbound Auth Zone"
-    target: https://nlnetlabs.nl/documentation/unbound
-  KNOT-PREFILL:
-    title: "Knot Resolver Prefill"
-    target: https://knot-resolver.readthedocs.io/en/stable/modules-prefill.html
-  QNAMEMIN:
-    title: DNS Query Privacy
-    target: https://www.potaroo.net/ispcol/2019-08/qmin.html
-  LOCALROOTPRIVACY:
-    title: Analyzing and mitigating privacy with the DNS root service
-    target: http://ant.isi.edu/~hardaker/papers/2018-02-ndss-analyzing-root-privacy.pdf
-  CACHEME:
-    title: "Cache Me If You Can: Effects of DNS Time-to-Live"
-    target: https://ant.isi.edu/~johnh/PAPERS/Moura19b.pdf
   draft-hardaker-dnsop-dns-xfr-scheme:
     title: The DNS XFR URI Schemes
     target: https://datatracker.ietf.org/doc/draft-hardaker-dnsop-dns-xfr-scheme/
@@ -75,9 +52,6 @@ informative:
   NOROOTS:
     title: On Eliminating Root Nameservers from the DNS
     target: https://www.icir.org/mallman/pubs/All19b/All19b.pdf
-  DNEROOTNAMES:
-    title: NoError vs NxDomain by-week
-    target: https://rssac002.root-servers.org/rcode_0_v_3.html
 
 --- abstract
 
