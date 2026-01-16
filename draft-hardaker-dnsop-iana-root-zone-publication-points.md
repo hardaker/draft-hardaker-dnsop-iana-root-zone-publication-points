@@ -101,7 +101,7 @@ The list of IANA root zone data publication points, available at TBD-URL, may
 be used to discover where the IANA root zone data can be fetched from.
 
 It is expected that this will be used as described in
-{{draft-wkumari-dnsop-localroot-bcp}}, and may be by the resolver software
+{{draft-wkumari-dnsop-localroot-bcp}}, and may be used by the resolver software
 directly, or by the operating system a resolver is deployed on, or by a network
 operator when configuring a resolver.
 
