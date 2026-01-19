@@ -44,7 +44,7 @@ informative:
     target: https://datatracker.ietf.org/doc/draft-hardaker-dnsop-dns-xfr-scheme/
   draft-hardaker-dnsop-root-zone-publication-list-guidelines:
     title: Guidelines for IANA DNS Root Zone Publication List Providers
-    target: https://raw.githubusercontent.com/hardaker/draft-hardaker-dnsop-root-zone-publication-list-guidelines/refs/heads/main/draft-hardaker-dnsop-root-zone-publication-list-guidelines.md
+    target: https://datatracker.ietf.org/doc/draft-hardaker-dnsop-root-zone-publication-list-guidelines
   draft-wkumari-dnsop-localroot-bcp:
     title: Populating resolvers with the root zone
     target: https://datatracker.ietf.org/doc/draft-wkumari-dnsop-localroot-bcp/
