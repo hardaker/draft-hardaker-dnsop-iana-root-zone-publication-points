@@ -1,6 +1,6 @@
 ---
-title: "A format for publishing a list of sources of IANA root zone data"
-abbrev: "IANA root zone publication points"
+title: "An IANA root zone publication source list format"
+abbrev: "IANA root zone publication point list format"
 category: std
 
 docname: draft-hardaker-dnsop-iana-root-zone-publication-points-latest
@@ -63,9 +63,9 @@ from.
 # Introduction
 
 DNS recursive resolvers implementing functionality such as LocalRoot
-{{draft-wkumari-dnsop-localroot-bcp}} or similar need to obtain the contents of
+{{draft-wkumari-dnsop-localroot-bcp}} need to obtain the contents of
 the IANA DNS root zone on a regular basis. This document describes a machine
-readable format to be used by IANA to publish a list of sources that can be
+readable format that can be used by IANA to publish a list of sources that can be
 used for obtaining the contents of the IANA DNS Root Zone.
 
 # IANA maintained list of root zone publication points  {#iana-root-zone-list}
@@ -78,8 +78,8 @@ It is expected that this will be used as described in
 directly, or by the operating system a resolver is deployed on, or by a network
 operator when configuring a resolver.
 
-The contents of the IANA DNS root publication points file MUST be verified as
-to its integrity as having come from IANA and MUST be verified as being
+The contents of the IANA DNS root publication points file MUST be verifiable as
+to its integrity as having come from IANA and MUST be verifiable as being
 complete.
 
 
@@ -99,28 +99,29 @@ While this specific format was originally designed for IANA's maintained list
 of root zone publication points, it may also be used by other publication point
 aggregation lists.
 
-URLs in the list may include any protocol capable of transferring DNS zone
+The list may include URLs using any protocol capable of transferring DNS zone
 data, including HTTPS {{RFC9110}}, AXFR
 {{draft-hardaker-dnsop-dns-xfr-scheme}}, XoT
 {{draft-hardaker-dnsop-dns-xfr-scheme}}, etc.
 
-Each URL MUST be on its own line.  Lines beginning with the "#" character are
+Each URL MUST occur on its own line.  Lines beginning with the "#" character are
 considered comments and MUST be ignored.  Leading and trailing whitespace on
-each line MUST be ignored.
+each line SHOULD be ignored.
 
-Any URLs that reference an unknown transfer protocol SHOULD be
-discarded.  If after filtering the list there are no acceptable list
+Any URLs that reference an unknown transfer protocol in the LocalRoot
+implementations SHOULD be discarded.  If after filtering the list
+there are no acceptable list
 elements left, the resolver MUST revert to using regular DNS queries
 to the IANA root zone instead of operating as a LocalRoot.
 
 The first line of the cryptographic checksum section will contain a
 checksum or signature type string specifying what the remaining lines
 in the checksum or signature section will contain.
-(Ed note: We know that this section is underspecified.  We expect to
+(Ed note: this section is underspecified.  We expect to
 refine this as we get feedback from the working group.)
 
-A minimal example publication point file, containing only a single
-AXFR publication point of b.root-servers.net:
+A minimal example publication point file, containing a single
+AXFR publication point with a target of b.root-servers.net:
 
 ~~~~
 axfr:b.root-servers.net/.
@@ -129,18 +130,25 @@ SHA256
 67d687eb21e59321dbb8115c51d1b4ddbd6634362859d130ed77b47a4410656c
 ~~~~
 
-## Publication point operational considerations
+Future note: this should eventually be a signature from an identity,
+regardless of format, that can be traced back to IANA being the
+authoritative publisher and not just a simple checksum.
+
+# Operational Considerations
 
 Implementations SHOULD optimize retrieval to minimize impacts on the
 server.  Because the list is not expected to change frequently,
 implementations SHOULD refrain from querying IANA's source more than
 once a week.
 
-# Operational Considerations
-
 TBD
 
 # Security Considerations
+
+It is critical that LocalRoot implementations (or other any code
+bases) making use of the publication point list format described in
+this document verify the contents using the encoded checksum to ensure
+it has not been tampered with.
 
 TBD
 
