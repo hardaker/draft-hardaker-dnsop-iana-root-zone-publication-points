@@ -3,7 +3,7 @@ title: "An IANA root zone publication source list format"
 abbrev: "IANA root zone publication point list format"
 category: std
 
-docname: draft-hardaker-dnsop-iana-root-zone-publication-points-latest
+docname: draft-hardaker-dnsop-root-zone-publication-points-latest
 submissiontype: IETF
 consensus: true
 v: 3
@@ -21,7 +21,7 @@ venue:
   type: "Working Group"
   mail: "dnsop@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/dnsop/"
-  github: "https://github.com/hardaker/draft-hardaker-dnsop-iana-root-zone-publication-points"
+  github: "https://github.com/hardaker/draft-hardaker-dnsop-root-zone-publication-points"
 
 author:
   -
