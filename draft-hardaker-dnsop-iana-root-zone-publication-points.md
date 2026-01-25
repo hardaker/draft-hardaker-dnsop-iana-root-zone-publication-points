@@ -124,10 +124,12 @@ A minimal example publication point file, containing a single
 AXFR publication point with a target of b.root-servers.net:
 
 ~~~~
+http://www.internic.net/domain/root.zone
+https://www.internic.net/domain/root.zone
 axfr:b.root-servers.net/.
 ----
 SHA256
-67d687eb21e59321dbb8115c51d1b4ddbd6634362859d130ed77b47a4410656c
+fba70cbd347741662a3e6c27056d0b8be07b65085633891407e24731c6736307
 ~~~~
 
 Future note: this should eventually be a signature from an identity,
