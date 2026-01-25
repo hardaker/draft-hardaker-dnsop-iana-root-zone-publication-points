@@ -126,10 +126,12 @@ AXFR publication point with a target of b.root-servers.net:
 ~~~~
 http://www.internic.net/domain/root.zone
 https://www.internic.net/domain/root.zone
+axfr:lax.xfr.dns.icann.org/.
+axfr:iad.xfr.dns.icann.org/.
 axfr:b.root-servers.net/.
 ----
 SHA256
-fba70cbd347741662a3e6c27056d0b8be07b65085633891407e24731c6736307
+500c443200c172d81f9811710530c1c244c0b45e702b53ad5bc3a83234f460b3
 ~~~~
 
 Future note: this should eventually be a signature from an identity,
