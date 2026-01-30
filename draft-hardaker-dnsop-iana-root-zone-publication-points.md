@@ -32,6 +32,24 @@ author:
     fullname: Warren Kumari
     organization: Google, Inc.
     email: warren@kumari.net
+  -
+    ins: J. Reid
+    name: Jim Reid
+    org: RTFM llp
+    street: St Andrews House
+    city: 382 Hillington Road, Glasgow Scotland
+    code: G51 4BL
+    country: UK
+    email: jim@rfc1035.com
+  -
+    ins: G. Huston
+    fullname: Geoff Huston
+    organization: APNIC
+    email: gih@apnic.net
+    street: 6 Cordelia St
+    city: South Brisbane
+    code: QLD 4101
+    country: Australia
 
 normative:
   BCP237:
