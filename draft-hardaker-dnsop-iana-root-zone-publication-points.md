@@ -121,10 +121,16 @@ While this specific format was originally designed for IANA's maintained list
 of root zone publication points, it may also be used by other publication point
 aggregation lists.
 
-The list may include URLs using any protocol capable of transferring DNS zone
-data, including HTTPS {{RFC9110}}, AXFR
+The list may include URLs using any protocol capable of transferring
+DNS zone data, including HTTP or HTTPS {{RFC9110}} (DNS zone file
+presentation format over HTTP or HTTPS), AXFR
 {{draft-hardaker-dnsop-dns-xfr-scheme}}, XoT
-{{draft-hardaker-dnsop-dns-xfr-scheme}}, etc.
+{{draft-hardaker-dnsop-dns-xfr-scheme}}, "XoH" (DNS AXFR over HTTP)
+{{draft-hardaker-dnsop-dns-xfr-scheme}}, etc.  URLs using http or
+https schemes are for transferring zone file contents in presentation
+format, not for indicating an AXFR transfer over DNS over HTTPS.  URLs
+for performing an AXFR over the protocol DNS over HTTPS should use the
+"xoh" scheme instead.
 
 Each URL MUST occur on its own line.  Lines beginning with the "#" character are
 considered comments and MUST be ignored.  Leading and trailing whitespace on
