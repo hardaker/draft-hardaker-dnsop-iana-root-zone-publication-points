@@ -3,29 +3,30 @@
 
 
 Domain Name System Operations                                W. Hardaker
-Internet-Draft                                  USC/ISI and Google, Inc.
-Updates: RFC8806 (if approved)                           16 January 2026
-Intended status: Standards Track                                        
-Expires: 20 July 2026
+Internet-Draft                                                 W. Kumari
+Updates: RFC8806 (if approved)                              Google, Inc.
+Intended status: Standards Track                                 J. Reid
+Expires: 29 August 2026                                         RTFM llp
+                                                               G. Huston
+                                                                   APNIC
+                                                        25 February 2026
 
 
-    A format for publishing a list of sources of IANA root zone data
-     draft-hardaker-dnsop-iana-root-zone-publication-points-latest
+            An IANA root zone publication source list format
+        draft-hardaker-dnsop-root-zone-publication-points-latest
 
 Abstract
 
-   DNS recursive resolvers implementing functionality like LocalRoot or
-   similar services need to obtain the contents of the IANA DNS root
-   zone on a regular basis.  This document describes a machine readable
-   format for IANA to use when publishing a list of known sources that
-   can be use for obtaining the contents of the IANA DNS Root Zone.
+   This document describes a machine readable format to be used by IANA
+   to publish a list of sources where the contents of the IANA DNS Root
+   Zone may be fetched from.
 
 About This Document
 
    This note is to be removed before publishing as an RFC.
 
    Status information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-hardaker-dnsop-iana-root-zone-
+   https://datatracker.ietf.org/doc/draft-hardaker-dnsop-root-zone-
    publication-points/.
 
    Discussion of this document takes place on the Domain Name System
@@ -35,7 +36,7 @@ About This Document
 
    Source for this draft and an issue tracker can be found at
    https://github.com/https://github.com/hardaker/draft-hardaker-dnsop-
-   iana-root-zone-publication-points.
+   root-zone-publication-points.
 
 Status of This Memo
 
@@ -52,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 July 2026.
+   This Internet-Draft will expire on 29 August 2026.
 
 Copyright Notice
 
@@ -73,7 +74,6 @@ Table of Contents
    1.  Introduction
    2.  IANA maintained list of root zone publication points
      2.1.  Root zone publication points
-     2.2.  Publication point operational considerations
    3.  Operational Considerations
    4.  Security Considerations
    5.  IANA Considerations
@@ -81,29 +81,31 @@ Table of Contents
      6.1.  Normative References
      6.2.  Informative References
    Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
-   DNS recursive resolvers implementing functionality like LocalRoot
-   [draft-wkumari-dnsop-localroot-bcp] or similar services need to
-   obtain the contents of the IANA DNS root zone on a regular basis.
-   This document describes a machine readable format for IANA to use
-   when publishing a list of known sources that can be use for obtaining
-   the contents of the IANA DNS Root Zone.
+   DNS recursive resolvers implementing functionality such as LocalRoot
+   [draft-wkumari-dnsop-localroot-bcp] need to obtain the contents of
+   the IANA DNS root zone on a regular basis.  This document describes a
+   machine readable format that can be used by IANA to publish a list of
+   sources that can be used for obtaining the contents of the IANA DNS
+   Root Zone.
 
 2.  IANA maintained list of root zone publication points
 
-   This list of IANA root zone data publication points available at TBD-
-   URL may be used when downloading and refreshing the root zone data,
-   as described in [draft-wkumari-dnsop-localroot-bcp].  Specifically,
-   this IANA DNS root zone publication list MAY be used by the resolver
+   The list of IANA root zone data publication points, available at TBD-
+   URL, may be used to discover where the IANA root zone data can be
+   fetched from.
+
+   It is expected that this will be used as described in
+   [draft-wkumari-dnsop-localroot-bcp], and may be used by the resolver
    software directly, or by the operating system a resolver is deployed
    on, or by a network operator when configuring a resolver.
 
-   The contents of the IANA DNS root publication points file MUST
-   verified as to its integrity as having come from IANA and MUST be
-   verified as complete.
+   The contents of the IANA DNS root publication points file MUST be
+   verifiable as to its integrity as having come from IANA and MUST be
+   verifiable as being complete.
 
 2.1.  Root zone publication points
 
@@ -112,49 +114,74 @@ Table of Contents
    list in a simple line-delimited format like below or signed JSON or
    signed PGP or ... is subject to debate.
 
-   The format of the IANA root zone data publication points file will
-   consist of two parts, separated by a line containing four dashes and
-   a newline ("----\n").  The top section of the file contain a newline
-   delimited list of URLs [RFC2056].  The second section, following the
-   line containing four dashes, will contain a cryptographic checksum or
-   signature.  Note that the format of this file applies to the IANA
-   maintained list of root zone publication points, but may or may not
-   be a format used by other publication point aggregation lists.
+   The IANA root zone data publication points file is structured into
+   two distinct segments, divided by a line consisting of four dashes
+   followed by a newline ("----\n").  The first segment contains a list
+   of URLs, one per line.  The second segment provides a signature or
+   cryptographic checksum.
 
-   URLs in the list may include any protocol capable of transferring DNS
-   zone data, including HTTPS [RFC9110], AXFR
+   While this specific format was originally designed for IANA's
+   maintained list of root zone publication points, it may also be used
+   by other publication point aggregation lists.
+
+   The list may include URLs using any protocol capable of transferring
+   DNS zone data, including HTTP or HTTPS [RFC9110] (DNS zone file
+   presentation format over HTTP or HTTPS), AXFR
    [draft-hardaker-dnsop-dns-xfr-scheme], XoT
-   [draft-hardaker-dnsop-dns-xfr-scheme], etc.
+   [draft-hardaker-dnsop-dns-xfr-scheme], "XoH" (DNS AXFR over HTTP)
+   [draft-hardaker-dnsop-dns-xfr-scheme], etc.  URLs using http or https
+   schemes are for transferring zone file contents in presentation
+   format, not for indicating an AXFR transfer over DNS over HTTPS.
+   URLs for performing an AXFR over the protocol DNS over HTTPS should
+   use the "xoh" scheme instead.
 
-   Any URLs that reference an unknown transfer protocol SHOULD be
-   discarded.  If after filtering the list there are no acceptable list
-   elements left, the resolver MUST revert to using regular DNS queries
-   to the IANA root zone instead of operating as a LocalRoot.
+   Each URL MUST occur on its own line.  Lines beginning with the "#"
+   character are considered comments and MUST be ignored.  Leading and
+   trailing whitespace on each line SHOULD be ignored.
 
-   The first line of the cryptograhpic checksum section will contain a
+   Any URLs that reference an unknown transfer protocol in the LocalRoot
+   implementations SHOULD be discarded.  If after filtering the list
+   there are no acceptable list elements left, the resolver MUST revert
+   to using regular DNS queries to the IANA root zone instead of
+   operating as a LocalRoot.
+
+   The first line of the cryptographic checksum section will contain a
    checksum or signature type string specifying what the remaining lines
-   in the checksum or signature section will contain.
+   in the checksum or signature section will contain.  (Ed note: this
+   section is underspecified.  We expect to refine this as we get
+   feedback from the working group.)
 
-   An minimal example publication point file, containing only a single
-   AXFR publication point of b.root-servers.net:
+   A minimal example publication point file, containing a single AXFR
+   publication point with a target of b.root-servers.net:
 
+   http://www.internic.net/domain/root.zone
+   https://www.internic.net/domain/root.zone
+   axfr:lax.xfr.dns.icann.org/.
+   axfr:iad.xfr.dns.icann.org/.
    axfr:b.root-servers.net/.
    ----
    SHA256
-   67d687eb21e59321dbb8115c51d1b4ddbd6634362859d130ed77b47a4410656c
+   500c443200c172d81f9811710530c1c244c0b45e702b53ad5bc3a83234f460b3
 
-2.2.  Publication point operational considerations
+   Future note: this should eventually be a signature from an identity,
+   regardless of format, that can be traced back to IANA being the
+   authoritative publisher and not just a simple checksum.
+
+3.  Operational Considerations
 
    Implementations SHOULD optimize retrieval to minimize impacts on the
    server.  Because the list is not expected to change frequently,
-   implementations SHOULD refrain from querying the IANA source more
-   than once a week.
-
-3.  Operational Considerations
+   implementations SHOULD refrain from querying IANA's source more than
+   once a week.
 
    TBD
 
 4.  Security Considerations
+
+   It is critical that LocalRoot implementations (or other any code
+   bases) making use of the publication point list format described in
+   this document verify the contents using the encoded checksum to
+   ensure it has not been tampered with.
 
    TBD
 
@@ -175,26 +202,10 @@ Table of Contents
               RFC 9364, DOI 10.17487/RFC9364, February 2023,
               <https://www.rfc-editor.org/info/rfc9364>.
 
-   [RFC1982]  Elz, R. and R. Bush, "Serial Number Arithmetic", RFC 1982,
-              DOI 10.17487/RFC1982, August 1996,
-              <https://www.rfc-editor.org/rfc/rfc1982>.
-
    [RFC4033]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "DNS Security Introduction and Requirements",
               RFC 4033, DOI 10.17487/RFC4033, March 2005,
               <https://www.rfc-editor.org/rfc/rfc4033>.
-
-   [RFC8198]  Fujiwara, K., Kato, A., and W. Kumari, "Aggressive Use of
-              DNSSEC-Validated Cache", RFC 8198, DOI 10.17487/RFC8198,
-              July 2017, <https://www.rfc-editor.org/rfc/rfc8198>.
-
-   [RFC8499]  Hoffman, P., Sullivan, A., and K. Fujiwara, "DNS
-              Terminology", RFC 8499, DOI 10.17487/RFC8499, January
-              2019, <https://www.rfc-editor.org/rfc/rfc8499>.
-
-   [RFC8806]  Kumari, W. and P. Hoffman, "Running a Root Server Local to
-              a Resolver", RFC 8806, DOI 10.17487/RFC8806, June 2020,
-              <https://www.rfc-editor.org/rfc/rfc8806>.
 
    [RFC8976]  Wessels, D., Barber, P., Weinberg, M., Kumari, W., and W.
               Hardaker, "Message Digest for DNS Zones", RFC 8976,
@@ -203,18 +214,6 @@ Table of Contents
 
 6.2.  Informative References
 
-   [BIND-MIRROR]
-              "BIND 9 Mirror Zones", n.d.,
-              <https://bind9.readthedocs.io/en/stable/
-              reference.html#namedconf-statement-type%20mirror>.
-
-   [CACHEME]  "Cache Me If You Can: Effects of DNS Time-to-Live", n.d.,
-              <https://ant.isi.edu/~johnh/PAPERS/Moura19b.pdf>.
-
-   [DNEROOTNAMES]
-              "NoError vs NxDomain by-week", n.d.,
-              <https://rssac002.root-servers.org/rcode_0_v_3.html>.
-
    [draft-hardaker-dnsop-dns-xfr-scheme]
               "The DNS XFR URI Schemes", n.d.,
               <https://datatracker.ietf.org/doc/draft-hardaker-dnsop-
@@ -222,44 +221,20 @@ Table of Contents
 
    [draft-hardaker-dnsop-root-zone-publication-list-guidelines]
               "Guidelines for IANA DNS Root Zone Publication List
-              Providers", n.d.,
-              <https://raw.githubusercontent.com/hardaker/draft-
-              hardaker-dnsop-root-zone-publication-list-
-              guidelines/refs/heads/main/draft-hardaker-dnsop-root-zone-
-              publication-list-guidelines.md>.
+              Providers", n.d., <https://datatracker.ietf.org/doc/draft-
+              hardaker-dnsop-root-zone-publication-list-guidelines>.
 
    [draft-wkumari-dnsop-localroot-bcp]
               "Populating resolvers with the root zone", n.d.,
               <https://datatracker.ietf.org/doc/draft-wkumari-dnsop-
               localroot-bcp/>.
 
-   [KNOT-PREFILL]
-              "Knot Resolver Prefill", n.d., <https://knot-
-              resolver.readthedocs.io/en/stable/modules-prefill.html>.
-
-   [LOCALROOTPRIVACY]
-              "Analyzing and mitigating privacy with the DNS root
-              service", n.d., <http://ant.isi.edu/~hardaker/
-              papers/2018-02-ndss-analyzing-root-privacy.pdf>.
-
    [NOROOTS]  "On Eliminating Root Nameservers from the DNS", n.d.,
               <https://www.icir.org/mallman/pubs/All19b/All19b.pdf>.
-
-   [QNAMEMIN] "DNS Query Privacy", n.d.,
-              <https://www.potaroo.net/ispcol/2019-08/qmin.html>.
-
-   [RFC2056]  Denenberg, R., Kunze, J., and D. Lynch, "Uniform Resource
-              Locators for Z39.50", RFC 2056, DOI 10.17487/RFC2056,
-              November 1996, <https://www.rfc-editor.org/rfc/rfc2056>.
 
    [RFC5936]  Lewis, E. and A. Hoenes, Ed., "DNS Zone Transfer Protocol
               (AXFR)", RFC 5936, DOI 10.17487/RFC5936, June 2010,
               <https://www.rfc-editor.org/rfc/rfc5936>.
-
-   [RFC7706]  Kumari, W. and P. Hoffman, "Decreasing Access Time to Root
-              Servers by Running One on Loopback", RFC 7706,
-              DOI 10.17487/RFC7706, November 2015,
-              <https://www.rfc-editor.org/rfc/rfc7706>.
 
    [RFC7766]  Dickinson, J., Dickinson, S., Bellis, R., Mankin, A., and
               D. Wessels, "DNS Transport over TCP - Implementation
@@ -271,21 +246,34 @@ Table of Contents
               DOI 10.17487/RFC9110, June 2022,
               <https://www.rfc-editor.org/rfc/rfc9110>.
 
-   [RFC9156]  Bortzmeyer, S., Dolmans, R., and P. Hoffman, "DNS Query
-              Name Minimisation to Improve Privacy", RFC 9156,
-              DOI 10.17487/RFC9156, November 2021,
-              <https://www.rfc-editor.org/rfc/rfc9156>.
-
-   [UNBOUND-AUTH-ZONE]
-              "Unbound Auth Zone", n.d.,
-              <https://nlnetlabs.nl/documentation/unbound>.
-
 Acknowledgments
 
    TBD
 
-Author's Address
+Authors' Addresses
 
    Wes Hardaker
-   USC/ISI and Google, Inc.
+   Google, Inc.
    Email: ietf@hardakers.net
+
+
+   Warren Kumari
+   Google, Inc.
+   Email: warren@kumari.net
+
+
+   Jim Reid
+   RTFM llp
+   St Andrews House
+   382 Hillington Road, Glasgow Scotland
+   G51 4BL
+   United Kingdom
+   Email: jim@rfc1035.com
+
+
+   Geoff Huston
+   APNIC
+   6 Cordelia St
+   South Brisbane  QLD 4101
+   Australia
+   Email: gih@apnic.net
